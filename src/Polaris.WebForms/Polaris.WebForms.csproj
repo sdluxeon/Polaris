@@ -52,7 +52,10 @@
     <Compile Include="Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="lib\DefaultMimeTypeResolver.cs" />
+    <Compile Include="lib\Observable.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
+    <Compile Include="Models\SpermogramaBrowser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainWindow.resx">
