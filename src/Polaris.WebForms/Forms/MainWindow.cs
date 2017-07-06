@@ -1,5 +1,6 @@
 ﻿using Polaris.WebForms.Models;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -26,10 +27,11 @@ namespace Polaris.WebForms.Forms
                 imagesListView.InvokeAsync(view =>
                 {
                     view.Items.Clear();
-                    view.Items.AddRange(x.Select(file => new FileInfo(file).Name).OrderBy(n => n).ToArray());
+                    view.Items.AddRange(x.Select(file => new FileInfo(file).FullName).OrderBy(n => n).ToArray());
                 });
-
             });
+
+            imagesListView.SelectedIndexChanged += ImagesListView_SelectedIndexChanged;
             //SpermogramaBrowser.Global.SelectedImage.Subscribe(x =>
             //{
             //    imagesListView.InvokeAsync((lv) =>
@@ -45,6 +47,13 @@ namespace Polaris.WebForms.Forms
             //});
 
             SpermogramaBrowser.Global.Scan(@"D:\SampleImages");
+
+        }
+
+        private void ImagesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //blobsBrowser1.SetImage((Bitmap)Bitmap.FromFile(imagesListView.SelectedItem.ToString()));
+            pictureBox1.Image = (Bitmap)Bitmap.FromFile(imagesListView.SelectedItem.ToString());
         }
 
         private void browseDirectory_Click(object sender, EventArgs e)
