@@ -7,7 +7,7 @@
     <ProjectGuid>{0B8E87B9-1EA1-4A08-A572-69B5E8FA806D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Polaris.WebForms</RootNamespace>
-    <AssemblyName>Polaris.WebForms</AssemblyName>
+    <AssemblyName>Polaris</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,6 +39,9 @@
     </Reference>
     <Reference Include="Accord.Imaging, Version=3.5.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
       <HintPath>..\packages\Accord.Imaging.3.5.0\lib\net45\Accord.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.MachineLearning, Version=3.5.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Accord.MachineLearning.3.5.0\lib\net45\Accord.MachineLearning.dll</HintPath>
     </Reference>
     <Reference Include="Accord.Math, Version=3.5.0.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
       <HintPath>..\packages\Accord.Math.3.5.0\lib\net45\Accord.Math.dll</HintPath>
@@ -77,8 +80,14 @@
     </Compile>
     <Compile Include="lib\DefaultMimeTypeResolver.cs" />
     <Compile Include="lib\Observable.cs" />
+    <Compile Include="Models\SpermDiscovery\AccordAutoDiscovery.cs" />
+    <Compile Include="Models\SpermDiscovery\IKMeansProvider.cs" />
+    <Compile Include="Models\SpermDiscovery\Point.cs" />
+    <Compile Include="Models\SpermDiscovery\Sperm.cs" />
+    <Compile Include="Models\SpermDiscovery\SpermType.cs" />
+    <Compile Include="Models\SpermogramaViewer.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
-    <Compile Include="Models\SpermogramaBrowser.cs" />
+    <Compile Include="Models\ImageBrowser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\BlobsBrowser.resx">

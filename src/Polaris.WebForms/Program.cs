@@ -1,4 +1,5 @@
 ﻿using Polaris.WebForms.Forms;
+using Polaris.WebForms.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Polaris.WebForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Application.Run(new MainWindow(ProgramStatus.Global, new ImageBrowser(), new SpermogramaViewer()));
         }
     }
 }

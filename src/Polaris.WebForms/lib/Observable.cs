@@ -25,7 +25,7 @@ namespace Polaris.WebForms.Models
             }
         }
 
-        public void Subscribe(Action<TState> onChange)
+        public void OnChange(Action<TState> onChange)
         {
             subscribers.Add(onChange);
             onChange(State);

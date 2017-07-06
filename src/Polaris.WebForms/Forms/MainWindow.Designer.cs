@@ -35,13 +35,18 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.imagesListView = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblOrange = new System.Windows.Forms.Label();
+            this.lblGreen = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblRed = new System.Windows.Forms.Label();
             this.statusBar.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +80,7 @@
             // browseDirectoryLabel
             // 
             this.browseDirectoryLabel.AutoSize = true;
-            this.browseDirectoryLabel.Location = new System.Drawing.Point(12, 588);
+            this.browseDirectoryLabel.Location = new System.Drawing.Point(93, 17);
             this.browseDirectoryLabel.Name = "browseDirectoryLabel";
             this.browseDirectoryLabel.Size = new System.Drawing.Size(127, 13);
             this.browseDirectoryLabel.TabIndex = 4;
@@ -83,12 +88,13 @@
             // 
             // imagesListView
             // 
-            this.imagesListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.imagesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagesListView.FormattingEnabled = true;
             this.imagesListView.Location = new System.Drawing.Point(12, 39);
             this.imagesListView.Name = "imagesListView";
-            this.imagesListView.Size = new System.Drawing.Size(367, 537);
+            this.imagesListView.Size = new System.Drawing.Size(367, 875);
             this.imagesListView.TabIndex = 5;
             // 
             // panel1
@@ -96,22 +102,22 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.pictureBox);
             this.panel1.Location = new System.Drawing.Point(388, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(826, 924);
             this.panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pictureBox
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(826, 900);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox.Location = new System.Drawing.Point(0, 12);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(826, 899);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
             // 
             // panel2
             // 
@@ -127,6 +133,11 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lblRed);
+            this.panel3.Controls.Add(this.lblOrange);
+            this.panel3.Controls.Add(this.lblGreen);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(1220, 0);
@@ -134,14 +145,59 @@
             this.panel3.Size = new System.Drawing.Size(313, 927);
             this.panel3.TabIndex = 7;
             // 
+            // lblOrange
+            // 
+            this.lblOrange.AutoSize = true;
+            this.lblOrange.Location = new System.Drawing.Point(57, 39);
+            this.lblOrange.Name = "lblOrange";
+            this.lblOrange.Size = new System.Drawing.Size(13, 13);
+            this.lblOrange.TabIndex = 4;
+            this.lblOrange.Text = "0";
+            // 
+            // lblGreen
+            // 
+            this.lblGreen.AutoSize = true;
+            this.lblGreen.Location = new System.Drawing.Point(57, 9);
+            this.lblGreen.Name = "lblGreen";
+            this.lblGreen.Size = new System.Drawing.Size(13, 13);
+            this.lblGreen.TabIndex = 3;
+            this.lblGreen.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Orange: ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Green: ";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 12);
+            this.label1.Location = new System.Drawing.Point(3, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "Red: ";
+            // 
+            // lblRed
+            // 
+            this.lblRed.AutoSize = true;
+            this.lblRed.Location = new System.Drawing.Point(57, 69);
+            this.lblRed.Name = "lblRed";
+            this.lblRed.Size = new System.Drawing.Size(13, 13);
+            this.lblRed.TabIndex = 5;
+            this.lblRed.Text = "0";
             // 
             // MainWindow
             // 
@@ -157,7 +213,7 @@
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -176,9 +232,14 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.ListBox imagesListView;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblOrange;
+        private System.Windows.Forms.Label lblGreen;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblRed;
     }
 }

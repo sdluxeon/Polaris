@@ -1,5 +1,6 @@
 ﻿using Polaris.WebForms.Models;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,61 +11,116 @@ namespace Polaris.WebForms.Forms
 {
     public partial class MainWindow : Form
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            ProgramStatus.Global.AddObserver(text =>
-            {
-                statusBar.InvokeAsync(x =>
-                {
-                    statusBarLabel.Text = text;
+        private ProgramStatus status;
 
-                });
+        private ImageBrowser spermogramaBrowser;
+
+        public MainWindow(ProgramStatus status, ImageBrowser imageBrowser, SpermogramaViewer spermogramaViewer)
+        {
+            this.status = status;
+            this.spermogramaBrowser = imageBrowser;
+            InitializeComponent();
+
+            status.AddObserver(text =>
+            {
+                this.ChangeStatus(text);
             });
 
-            SpermogramaBrowser.Global.Images.Subscribe(x =>
+            imageBrowser.Images.OnChange(images =>
             {
-                imagesListView.InvokeAsync(view =>
-                {
-                    view.Items.Clear();
-                    view.Items.AddRange(x.Select(file => new FileInfo(file).FullName).OrderBy(n => n).ToArray());
-                });
+                this.BrowseFiles(images);
             });
 
             imagesListView.SelectedIndexChanged += ImagesListView_SelectedIndexChanged;
-            //SpermogramaBrowser.Global.SelectedImage.Subscribe(x =>
-            //{
-            //    imagesListView.InvokeAsync((lv) =>
-            //    {
-            //        var itemToSelect = imagesListView.Items.IndexOf(x);
-            //        if (itemToSelect >= 0)
-            //        {
-            //            //imagesListView.Items[itemToSelect] = true;
-            //            //  imagesListView.Select();
-            //        }
-            //    });
 
-            //});
+            imageBrowser.SelectedImage.OnChange(x =>
+            {
+                spermogramaViewer.View(x);
+            });
 
-            SpermogramaBrowser.Global.Scan(@"D:\SampleImages");
+            spermogramaViewer.DisplayImage.OnChange(bitmap =>
+            {
+                this.UpdateImage(bitmap);
+            });
 
+            spermogramaViewer.Spermatosoids.OnChange(x =>
+            {
+                if (x != null)
+                {
+                    this.lblRed.InvokeAsync(lbl => { lbl.Text = x.Count(xx => xx.SpermType == SpermType.Red).ToString(); });
+                    this.lblGreen.InvokeAsync(lbl => { lbl.Text = x.Count(xx => xx.SpermType == SpermType.Green).ToString(); });
+                    this.lblOrange.InvokeAsync(lbl => { lbl.Text = x.Count(xx => xx.SpermType == SpermType.Orange).ToString(); });
+                }
+            });
+
+            //imageBrowser.Scan(@"D:\SampleImages");
         }
 
         private void ImagesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //blobsBrowser1.SetImage((Bitmap)Bitmap.FromFile(imagesListView.SelectedItem.ToString()));
-            pictureBox1.Image = (Bitmap)Bitmap.FromFile(imagesListView.SelectedItem.ToString());
+            spermogramaBrowser.Select(imagesListView.SelectedItem.ToString());
         }
 
         private void browseDirectory_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                browseDirectoryLabel.Text = folderBrowserDialog.SelectedPath;
-                SpermogramaBrowser.Global.Scan(folderBrowserDialog.SelectedPath).ContinueWith((c) => { this.InvokeAsync(x => { this.Enabled = true; }); });
+                DisableUI();
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    browseDirectoryLabel.Text = folderBrowserDialog.SelectedPath;
+                    spermogramaBrowser.Scan(folderBrowserDialog.SelectedPath).ContinueWith((c) => EnableUI());
+                }
+                else
+                {
+                    EnableUI();
+                }
             }
+            catch (Exception ex)
+            {
+                EnableUI();
+            }
+        }
 
+        private void DisableUI()
+        {
+            this.InvokeAsync(x =>
+            {
+                this.Enabled = false;
+            });
+        }
+
+        private void EnableUI()
+        {
+            this.InvokeAsync(x =>
+            {
+                this.Enabled = true;
+            });
+        }
+
+        private void UpdateImage(Image img)
+        {
+            pictureBox.InvokeAsync(pb =>
+            {
+                pb.Image = img;
+            });
+        }
+
+        private void ChangeStatus(string text)
+        {
+            statusBar.InvokeAsync(x =>
+            {
+                statusBarLabel.Text = text;
+            });
+        }
+
+        private void BrowseFiles(IEnumerable<string> images)
+        {
+            imagesListView.InvokeAsync(view =>
+            {
+                view.Items.Clear();
+                view.Items.AddRange(images.OrderBy(fileName => fileName).ToArray());
+            });
         }
     }
 }

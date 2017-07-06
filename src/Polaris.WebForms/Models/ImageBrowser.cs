@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Polaris.WebForms.Models
 {
 
-    public class SpermogramaBrowser
+    public class ImageBrowser
     {
         public Observable<List<string>> Images { get; private set; }
 
@@ -15,7 +15,7 @@ namespace Polaris.WebForms.Models
 
         private DefaultMimeTypeResolver mimeTypes = new DefaultMimeTypeResolver();
 
-        public SpermogramaBrowser()
+        public ImageBrowser()
         {
             Images = new Observable<List<string>>(new List<string>());
             SelectedImage = new Observable<string>(null);
@@ -61,7 +61,5 @@ namespace Polaris.WebForms.Models
         {
             throw new NotImplementedException();
         }
-
-        public static SpermogramaBrowser Global = new SpermogramaBrowser();
     }
 }
