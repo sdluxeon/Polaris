@@ -35,15 +35,22 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.imagesListView = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelCurrentImage = new System.Windows.Forms.TextBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnDiscover = new System.Windows.Forms.Button();
+            this.btnOrangeMarker = new System.Windows.Forms.RadioButton();
+            this.btnRedMarker = new System.Windows.Forms.RadioButton();
+            this.btnGreenMarker = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblRed = new System.Windows.Forms.Label();
             this.lblOrange = new System.Windows.Forms.Label();
             this.lblGreen = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblRed = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.statusBar.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -102,19 +109,29 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.labelCurrentImage);
             this.panel1.Controls.Add(this.pictureBox);
             this.panel1.Location = new System.Drawing.Point(388, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(826, 924);
             this.panel1.TabIndex = 0;
             // 
+            // labelCurrentImage
+            // 
+            this.labelCurrentImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelCurrentImage.Location = new System.Drawing.Point(1, 14);
+            this.labelCurrentImage.Name = "labelCurrentImage";
+            this.labelCurrentImage.ReadOnly = true;
+            this.labelCurrentImage.Size = new System.Drawing.Size(822, 20);
+            this.labelCurrentImage.TabIndex = 1;
+            // 
             // pictureBox
             // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Location = new System.Drawing.Point(0, 12);
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.Location = new System.Drawing.Point(0, 39);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(826, 899);
+            this.pictureBox.Size = new System.Drawing.Size(826, 872);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
@@ -133,6 +150,11 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnDiscover);
+            this.panel3.Controls.Add(this.btnOrangeMarker);
+            this.panel3.Controls.Add(this.btnRedMarker);
+            this.panel3.Controls.Add(this.btnGreenMarker);
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.lblRed);
             this.panel3.Controls.Add(this.lblOrange);
             this.panel3.Controls.Add(this.lblGreen);
@@ -145,10 +167,74 @@
             this.panel3.Size = new System.Drawing.Size(313, 927);
             this.panel3.TabIndex = 7;
             // 
+            // btnDiscover
+            // 
+            this.btnDiscover.Location = new System.Drawing.Point(226, 12);
+            this.btnDiscover.Name = "btnDiscover";
+            this.btnDiscover.Size = new System.Drawing.Size(75, 23);
+            this.btnDiscover.TabIndex = 11;
+            this.btnDiscover.Text = "Discover";
+            this.btnDiscover.UseVisualStyleBackColor = true;
+            this.btnDiscover.Click += new System.EventHandler(this.btnDiscover_Click);
+            // 
+            // btnOrangeMarker
+            // 
+            this.btnOrangeMarker.AutoSize = true;
+            this.btnOrangeMarker.Location = new System.Drawing.Point(6, 136);
+            this.btnOrangeMarker.Name = "btnOrangeMarker";
+            this.btnOrangeMarker.Size = new System.Drawing.Size(60, 17);
+            this.btnOrangeMarker.TabIndex = 10;
+            this.btnOrangeMarker.Text = "Orange";
+            this.btnOrangeMarker.UseVisualStyleBackColor = true;
+            // 
+            // btnRedMarker
+            // 
+            this.btnRedMarker.AutoSize = true;
+            this.btnRedMarker.Location = new System.Drawing.Point(6, 113);
+            this.btnRedMarker.Name = "btnRedMarker";
+            this.btnRedMarker.Size = new System.Drawing.Size(45, 17);
+            this.btnRedMarker.TabIndex = 9;
+            this.btnRedMarker.Text = "Red";
+            this.btnRedMarker.UseVisualStyleBackColor = true;
+            // 
+            // btnGreenMarker
+            // 
+            this.btnGreenMarker.AutoSize = true;
+            this.btnGreenMarker.Checked = true;
+            this.btnGreenMarker.Location = new System.Drawing.Point(6, 90);
+            this.btnGreenMarker.Name = "btnGreenMarker";
+            this.btnGreenMarker.Size = new System.Drawing.Size(54, 17);
+            this.btnGreenMarker.TabIndex = 8;
+            this.btnGreenMarker.TabStop = true;
+            this.btnGreenMarker.Text = "Green";
+            this.btnGreenMarker.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Markers";
+            // 
+            // lblRed
+            // 
+            this.lblRed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblRed.AutoSize = true;
+            this.lblRed.Location = new System.Drawing.Point(57, 903);
+            this.lblRed.Name = "lblRed";
+            this.lblRed.Size = new System.Drawing.Size(13, 13);
+            this.lblRed.TabIndex = 5;
+            this.lblRed.Text = "0";
+            // 
             // lblOrange
             // 
+            this.lblOrange.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblOrange.AutoSize = true;
-            this.lblOrange.Location = new System.Drawing.Point(57, 39);
+            this.lblOrange.Location = new System.Drawing.Point(57, 873);
             this.lblOrange.Name = "lblOrange";
             this.lblOrange.Size = new System.Drawing.Size(13, 13);
             this.lblOrange.TabIndex = 4;
@@ -156,8 +242,10 @@
             // 
             // lblGreen
             // 
+            this.lblGreen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblGreen.AutoSize = true;
-            this.lblGreen.Location = new System.Drawing.Point(57, 9);
+            this.lblGreen.Location = new System.Drawing.Point(57, 843);
             this.lblGreen.Name = "lblGreen";
             this.lblGreen.Size = new System.Drawing.Size(13, 13);
             this.lblGreen.TabIndex = 3;
@@ -165,8 +253,10 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 39);
+            this.label3.Location = new System.Drawing.Point(3, 873);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 2;
@@ -174,8 +264,10 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Location = new System.Drawing.Point(3, 843);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 1;
@@ -183,21 +275,14 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 69);
+            this.label1.Location = new System.Drawing.Point(3, 903);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Red: ";
-            // 
-            // lblRed
-            // 
-            this.lblRed.AutoSize = true;
-            this.lblRed.Location = new System.Drawing.Point(57, 69);
-            this.lblRed.Name = "lblRed";
-            this.lblRed.Size = new System.Drawing.Size(13, 13);
-            this.lblRed.TabIndex = 5;
-            this.lblRed.Text = "0";
             // 
             // MainWindow
             // 
@@ -213,6 +298,7 @@
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -241,5 +327,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblRed;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.RadioButton btnOrangeMarker;
+        private System.Windows.Forms.RadioButton btnRedMarker;
+        private System.Windows.Forms.RadioButton btnGreenMarker;
+        private System.Windows.Forms.Button btnDiscover;
+        private System.Windows.Forms.TextBox labelCurrentImage;
     }
 }

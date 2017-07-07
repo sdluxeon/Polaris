@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace Polaris.WebForms.Models
 {
-    public class Observable<TState>
+    public class Observable<TState> : IDisposable
     {
         public TState State { get; private set; }
 
@@ -33,7 +33,16 @@ namespace Polaris.WebForms.Models
 
         public Observable<TState> Change(TState newState)
         {
+            if (this.State is IDisposable)
+                (this.State as IDisposable).Dispose();
             return new Observable<TState>(newState, this.subscribers);
+        }
+
+        public void Dispose()
+        {
+            if (this.State is IDisposable)
+                (this.State as IDisposable).Dispose();
+            this.subscribers = new ConcurrentBag<Action<TState>>();
         }
     }
 }

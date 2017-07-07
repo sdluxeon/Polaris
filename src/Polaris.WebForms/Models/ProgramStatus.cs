@@ -42,6 +42,4 @@ namespace Polaris.WebForms.Models
             }
         }
     }
-
-
 }

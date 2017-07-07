@@ -81,10 +81,13 @@
     <Compile Include="lib\DefaultMimeTypeResolver.cs" />
     <Compile Include="lib\Observable.cs" />
     <Compile Include="Models\SpermDiscovery\AccordAutoDiscovery.cs" />
+    <Compile Include="Models\SpermDiscovery\IAccordAreaBasedAutoDiscovery.cs" />
     <Compile Include="Models\SpermDiscovery\IKMeansProvider.cs" />
-    <Compile Include="Models\SpermDiscovery\Point.cs" />
+    <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\PointExtensions.cs" />
     <Compile Include="Models\SpermDiscovery\Sperm.cs" />
     <Compile Include="Models\SpermDiscovery\SpermType.cs" />
+    <Compile Include="Models\Spermogram.cs" />
     <Compile Include="Models\SpermogramaViewer.cs" />
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Models\ImageBrowser.cs" />

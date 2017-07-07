@@ -1,75 +1,39 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace Polaris.WebForms.Models
 {
+    public static class SpermogramColors
+    {
+        public static Dictionary<SpermType, Color> Border;
+
+        static SpermogramColors()
+        {
+            Border = new Dictionary<SpermType, Color>();
+            Border.Add(SpermType.Unknown, Color.LightCyan);
+            Border.Add(SpermType.Green, Color.Green);
+            Border.Add(SpermType.Red, Color.Red);
+            Border.Add(SpermType.Orange, Color.DarkOrange);
+        }
+
+    }
     public class SpermogramaViewer
     {
-        AccordAreaBasedAutoDiscovery discovery;
-
-        private Bitmap originalImage;
+        public Observable<Spermogram> CurrentSpermograma { get; private set; }
 
         public SpermogramaViewer()
         {
-            discovery = new AccordAreaBasedAutoDiscovery();
-            DisplayImage = new Observable<Bitmap>(null);
-            Spermatosoids = new Observable<List<Sperm>>(null);
+            CurrentSpermograma = new Observable<Spermogram>(Spermogram.Empty);
         }
 
-        public Observable<Bitmap> DisplayImage { get; private set; }
-
-        public Observable<List<Sperm>> Spermatosoids { get; private set; }
-
-        public void View(string imageLocation)
+        public void View(string location)
         {
-            originalImage = null;
-            if (imageLocation != null)
+            var spermograma = Spermogram.Empty;
+            if (location != null)
             {
-                originalImage = (Bitmap)Bitmap.FromFile(imageLocation);
-                DisplayImage = DisplayImage.Change((Bitmap)originalImage.Clone());
-                Discover();//test
-                ShowAll();
+                spermograma = new Spermogram((Bitmap)Bitmap.FromFile(location), new AccordAreaBasedAutoDiscovery());
             }
-        }
-
-
-        public void Discover()
-        {
-            if (originalImage == null)
-                return;
-            lock (originalImage)
-            {
-                var localCopy = originalImage.Clone() as Bitmap;
-                var result = discovery.Discover(localCopy);
-                Spermatosoids = Spermatosoids.Change(result.ToList());
-            }
-        }
-
-        public void ShowAll()
-        {
-            if (originalImage == null)
-                return;
-            lock (originalImage)
-            {
-                var localCopy = originalImage.Clone() as Bitmap;
-                Dictionary<SpermType, Color> borderColors = new Dictionary<SpermType, Color>();
-                borderColors.Add(SpermType.Unknown, Color.LightCyan);
-                borderColors.Add(SpermType.Green, Color.White);
-                borderColors.Add(SpermType.Red, Color.Red);
-                borderColors.Add(SpermType.Orange, Color.Blue);
-                using (var graphics = Graphics.FromImage(localCopy))
-                {
-                    foreach (var item in Spermatosoids.State)
-                    {
-                        using (var pen = new Pen(borderColors[item.SpermType], 2))
-                        {
-                            graphics.DrawPolygon(pen, item.Points.Select(x => new System.Drawing.Point(x.X, x.Y)).ToArray());
-                        }
-                    }
-                }
-                DisplayImage = DisplayImage.Change(localCopy);
-            }
+            CurrentSpermograma = CurrentSpermograma.Change(spermograma);
         }
     }
 }
