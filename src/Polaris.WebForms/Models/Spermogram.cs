@@ -136,7 +136,7 @@ namespace Polaris.WebForms.Models
             {
                 var area = discovery.GetAvarageSpermArea(localCopy);
                 if (area == 0)
-                    return 100;
+                    return 200;
                 else
                     return area;
             }
