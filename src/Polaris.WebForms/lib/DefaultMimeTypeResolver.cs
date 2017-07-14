@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Polaris.WebForms.Models
 {
     public class DefaultMimeTypeResolver
     {
-        readonly IList<MimeTypeMapper> mappings = new List<MimeTypeMapper>
+
+        readonly IList<MimeTypeMapper> mappings;
+        readonly int minimumBytes;
+        public DefaultMimeTypeResolver()
+        {
+            mappings = new List<MimeTypeMapper>
             {
                 new MimeTypeMapper( "BMP", ".bmp", "image/bmp", new MimeTypePattern(new byte[] { 66, 77 }) ),
                 new MimeTypeMapper( "DOC", ".doc", "application/msword", new MimeTypePattern(new byte[] { 208, 207, 17, 224, 161, 177, 26, 225 } )),
@@ -50,6 +56,24 @@ namespace Polaris.WebForms.Models
                 new MimeTypeMapper( "GIF", ".gif", "image/gif", new MimeTypePattern("47 49 46 38 37 61" )),
                 new MimeTypeMapper( "GIF", ".gif", "image/gif", new MimeTypePattern("47 49 46 38 39 61" ))
             };
+            minimumBytes = mappings.Max(x => x.Pattern.Bytes.Length);
+        }
+
+        public string GetMimeType(Stream stream)
+        {
+            if (stream.Length < minimumBytes)
+                return DefaultMimeType;
+
+            var data = new byte[minimumBytes];
+            stream.Read(data, 0, minimumBytes);
+            foreach (var mapping in mappings)
+            {
+                if (mapping.Pattern.IsMatch(data))
+                    return mapping.Mime;
+            }
+
+            return DefaultMimeType;
+        }
 
         public string GetMimeType(byte[] data)
         {

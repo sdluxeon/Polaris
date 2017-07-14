@@ -36,10 +36,12 @@ namespace Polaris.WebForms.Models
                  foreach (var item in allfiles)
                  {
                      status.Change(new FileInfo(item).Name);
-                     var fileBytes = File.ReadAllBytes(item);
-                     var mimeType = mimeTypes.GetMimeType(fileBytes);
-                     if (mimeType.StartsWith("image"))
-                         newImages.Add(item);
+                     using (var stream = File.OpenRead(item))
+                     {
+                         var mimeType = mimeTypes.GetMimeType(stream);
+                         if (mimeType.StartsWith("image"))
+                             newImages.Add(item);
+                     }
                  }
                  Images = Images.Change(newImages);
                  SelectedImage = SelectedImage.Change(newImages.FirstOrDefault());
