@@ -33,11 +33,11 @@
             this.browseDirectory = new System.Windows.Forms.Button();
             this.browseDirectoryLabel = new System.Windows.Forms.Label();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.imagesListView = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelCurrentImage = new System.Windows.Forms.TextBox();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.imagesView = new System.Windows.Forms.TreeView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnDiscover = new System.Windows.Forms.Button();
             this.btnOrangeMarker = new System.Windows.Forms.RadioButton();
@@ -93,17 +93,6 @@
             this.browseDirectoryLabel.TabIndex = 4;
             this.browseDirectoryLabel.Text = "Please Select A Directory";
             // 
-            // imagesListView
-            // 
-            this.imagesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.imagesListView.FormattingEnabled = true;
-            this.imagesListView.Location = new System.Drawing.Point(12, 39);
-            this.imagesListView.Name = "imagesListView";
-            this.imagesListView.Size = new System.Drawing.Size(367, 875);
-            this.imagesListView.TabIndex = 5;
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -140,13 +129,23 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel2.Controls.Add(this.imagesListView);
+            this.panel2.Controls.Add(this.imagesView);
             this.panel2.Controls.Add(this.browseDirectory);
             this.panel2.Controls.Add(this.browseDirectoryLabel);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(382, 924);
             this.panel2.TabIndex = 6;
+            // 
+            // imagesView
+            // 
+            this.imagesView.FullRowSelect = true;
+            this.imagesView.HideSelection = false;
+            this.imagesView.Location = new System.Drawing.Point(12, 41);
+            this.imagesView.Name = "imagesView";
+            this.imagesView.ShowNodeToolTips = true;
+            this.imagesView.Size = new System.Drawing.Size(367, 880);
+            this.imagesView.TabIndex = 5;
             // 
             // panel3
             // 
@@ -316,7 +315,6 @@
         private System.Windows.Forms.Button browseDirectory;
         private System.Windows.Forms.Label browseDirectoryLabel;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.ListBox imagesListView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Panel panel2;
@@ -334,5 +332,6 @@
         private System.Windows.Forms.RadioButton btnGreenMarker;
         private System.Windows.Forms.Button btnDiscover;
         private System.Windows.Forms.TextBox labelCurrentImage;
+        private System.Windows.Forms.TreeView imagesView;
     }
 }

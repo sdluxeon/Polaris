@@ -1,5 +1,6 @@
 ﻿using Polaris.WebForms.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -12,6 +13,8 @@ namespace Polaris.WebForms.Forms
 {
     public partial class MainWindow : Form
     {
+        static double zoom = 1d;
+
         private ProgramStatus status;
 
         private ImageBrowser spermogramaBrowser;
@@ -42,7 +45,7 @@ namespace Polaris.WebForms.Forms
                 this.BrowseFiles(images);
             });
 
-            imagesListView.SelectedIndexChanged += ImagesListView_SelectedIndexChanged;
+            imagesView.AfterSelect += ImagesListView_SelectedIndexChanged;
 
             imageBrowser.SelectedImage.OnChange(x =>
             {
@@ -69,14 +72,30 @@ namespace Polaris.WebForms.Forms
                     }
                 });
             });
+
             pictureBox.Click += pictureBox_Click;
-            //imageBrowser.Scan(@"D:\SampleImages");
+            imageBrowser.Scan(@"D:\SampleImages");
+            this.KeyPreview = true;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Control | Keys.D1: btnGreenMarker.PerformClick(); return true;
+                case Keys.Control | Keys.D2: btnRedMarker.PerformClick(); return true;
+                case Keys.Control | Keys.D3: btnOrangeMarker.PerformClick(); return true;
+                default: return base.ProcessCmdKey(ref msg, keyData);
+            }
         }
 
         private void ImagesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            spermogramaBrowser.Select(imagesListView.SelectedItem.ToString());
-            labelCurrentImage.Text = imagesListView.SelectedItem.ToString();
+            if (string.IsNullOrEmpty(imagesView.SelectedNode.ToolTipText) == false)
+            {
+                spermogramaBrowser.Select(imagesView.SelectedNode.ToolTipText.ToString());
+                labelCurrentImage.Text = imagesView.SelectedNode.ToolTipText.ToString();
+            }
         }
 
         private void browseDirectory_Click(object sender, EventArgs e)
@@ -134,10 +153,12 @@ namespace Polaris.WebForms.Forms
 
         private void BrowseFiles(IEnumerable<string> images)
         {
-            imagesListView.InvokeAsync(view =>
+            imagesView.InvokeAsync(view =>
             {
-                view.Items.Clear();
-                view.Items.AddRange(images.OrderBy(fileName => fileName).ToArray());
+                imagesView.Nodes.Clear();
+                var discoverer = new DirecotryDiscoverer(images);
+                discoverer.CompressRoots();
+                imagesView.Nodes.AddRange(discoverer.Roots.OrderBy(x => x.DirectoryInfo.Name).Select(x => x.ToTreeViewNode()).ToArray());
             });
         }
 
@@ -228,5 +249,7 @@ namespace Polaris.WebForms.Forms
         {
             spermogramaViewer.CurrentSpermograma.State.Discover();
         }
+
+
     }
 }

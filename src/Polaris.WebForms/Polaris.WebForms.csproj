@@ -65,12 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\BlobsBrowser.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\BlobsBrowser.designer.cs">
-      <DependentUpon>BlobsBrowser.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Forms\DirecotryDiscoverer.cs" />
     <Compile Include="Forms\ControlExtensions.cs" />
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
@@ -93,9 +88,6 @@
     <Compile Include="Models\ImageBrowser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\BlobsBrowser.resx">
-      <DependentUpon>BlobsBrowser.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
