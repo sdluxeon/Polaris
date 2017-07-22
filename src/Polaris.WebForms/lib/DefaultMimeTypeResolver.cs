@@ -54,8 +54,9 @@ namespace Polaris.WebForms.Models
                 new MimeTypeMapper( "JPG", ".jpg", "image/jpeg", new MimeTypePattern("FF D8 FF E8" )),
                 new MimeTypeMapper( "JPG", ".bmp", "image/bmp", new MimeTypePattern("42 4D" )),
                 new MimeTypeMapper( "GIF", ".gif", "image/gif", new MimeTypePattern("47 49 46 38 37 61" )),
-                new MimeTypeMapper( "GIF", ".gif", "image/gif", new MimeTypePattern("47 49 46 38 39 61" ))
-            };
+                new MimeTypeMapper( "GIF", ".gif", "image/gif", new MimeTypePattern("47 49 46 38 39 61" )),
+                new MimeTypeMapper("TIF",".tif","image/gife",new MimeTypePattern("49 20 49"))
+        };
             minimumBytes = mappings.Max(x => x.Pattern.Bytes.Length);
         }
 

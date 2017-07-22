@@ -74,7 +74,7 @@ namespace Polaris.WebForms.Forms
             });
 
             pictureBox.Click += pictureBox_Click;
-            imageBrowser.Scan(@"D:\SampleImages");
+            // imageBrowser.Scan(@"D:\SampleImages");
             this.KeyPreview = true;
         }
 
