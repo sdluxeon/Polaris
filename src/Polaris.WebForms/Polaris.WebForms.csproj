@@ -88,7 +88,6 @@
     <Compile Include="Models\ProgramStatus.cs" />
     <Compile Include="Models\ImageBrowser.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
