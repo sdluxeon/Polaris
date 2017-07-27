@@ -48,14 +48,15 @@ namespace Polaris.WebForms.Forms
                 return node;
             }
         }
+
         public void CompressRoots()
         {
-
             while (Roots.Count == 1 && Roots.SelectMany(x => x.Files).Count() == 0)
             {
                 Roots = Roots.FirstOrDefault().ImageDirs;
             }
         }
+
         private ImageDir GetDir(DirectoryInfo dirInfo)
         {
             if (dirInfo.Parent == null)

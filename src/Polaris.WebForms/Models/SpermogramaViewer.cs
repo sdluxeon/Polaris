@@ -17,23 +17,23 @@ namespace Polaris.WebForms.Models
         }
 
     }
-    public class SpermogramaViewer
+    public class SpermogramViewer
     {
-        public Observable<Spermogram> CurrentSpermograma { get; private set; }
+        public Observable<Spermogram> CurrentSpermogram { get; private set; }
 
-        public SpermogramaViewer()
+        public SpermogramViewer()
         {
-            CurrentSpermograma = new Observable<Spermogram>(Spermogram.Empty);
+            CurrentSpermogram = new Observable<Spermogram>(Spermogram.Empty);
         }
 
         public void View(string location)
         {
-            var spermograma = Spermogram.Empty;
+            var spermogram = Spermogram.Empty;
             if (location != null)
             {
-                spermograma = new Spermogram((Bitmap)Bitmap.FromFile(location), new AccordAreaBasedAutoDiscovery());
+                spermogram = new Spermogram((Bitmap)Bitmap.FromFile(location), new AccordAreaBasedAutoDiscovery());
             }
-            CurrentSpermograma = CurrentSpermograma.Change(spermograma);
+            CurrentSpermogram = CurrentSpermogram.Change(spermogram);
         }
     }
 }

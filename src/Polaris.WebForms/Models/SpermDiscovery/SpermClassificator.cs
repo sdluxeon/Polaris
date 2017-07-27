@@ -76,32 +76,5 @@ namespace Polaris.WebForms.Models
                 return SpermType.Orange;
             return SpermType.Unknown;
         }
-
-        //private SpermType DiscoverTypeNotUsed(Color argbColor)
-        //{
-        //    Dictionary<Color, int> colorDistances = new Dictionary<Color, int>();
-        //    colorDistances.Add(Color.Green, ColorDiff(Color.FromArgb(0, 255, 0), argbColor));
-        //    colorDistances.Add(Color.Yellow, ColorDiff(Color.Yellow, argbColor));
-        //    colorDistances.Add(Color.Orange, ColorDiff(Color.Orange, argbColor));
-        //    colorDistances.Add(Color.Red, ColorDiff(Color.FromArgb(255, 0, 0), argbColor));
-
-        //    Dictionary<Color, SpermType> spermTypes = new Dictionary<Color, SpermType>();
-        //    spermTypes.Add(Color.Green, SpermType.Green);
-        //    spermTypes.Add(Color.Yellow, SpermType.Orange);
-        //    spermTypes.Add(Color.Orange, SpermType.Orange);
-        //    spermTypes.Add(Color.Red, SpermType.Red);
-
-        //    var closestColor = colorDistances.OrderBy(x => x.Value).FirstOrDefault().Key;
-
-        //    return spermTypes[closestColor];
-        //}
-
-        //private int ColorDiff(Color c1, Color c2)
-        //{
-        //    return (int)Math.Sqrt((c1.R - c2.R) * (c1.R - c2.R)
-        //                           + (c1.G - c2.G) * (c1.G - c2.G)
-        //                           + (c1.B - c2.B) * (c1.B - c2.B));
-        //}
-
     }
 }

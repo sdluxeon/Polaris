@@ -17,6 +17,7 @@ namespace Polaris.WebForms.Models
             return 0;
         }
     }
+
     public class Spermogram : IDisposable
     {
         public static Spermogram Empty { get { return new Spermogram(); } }

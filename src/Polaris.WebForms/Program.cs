@@ -18,7 +18,7 @@ namespace Polaris.WebForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow(ProgramStatus.Global, new ImageBrowser(), new SpermogramaViewer()));
+            Application.Run(new MainWindow(ProgramStatus.Global, new ImageBrowser(), new SpermogramViewer()));
         }
     }
 }

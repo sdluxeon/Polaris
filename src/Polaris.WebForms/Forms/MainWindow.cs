@@ -13,22 +13,20 @@ namespace Polaris.WebForms.Forms
 {
     public partial class MainWindow : Form
     {
-        static double zoom = 1d;
-
         private ProgramStatus status;
 
-        private ImageBrowser spermogramaBrowser;
+        private ImageBrowser imageBrowser;
 
-        private SpermogramaViewer spermogramaViewer;
+        private SpermogramViewer spermogramaViewer;
 
         private SpermType currentMarker;
 
-        public MainWindow(ProgramStatus status, ImageBrowser imageBrowser, SpermogramaViewer spermogramaViewer)
+        public MainWindow(ProgramStatus status, ImageBrowser imageBrowser, SpermogramViewer spermogramaViewer)
         {
             InitializeComponent();
             this.currentMarker = SpermType.Green;
             this.status = status;
-            this.spermogramaBrowser = imageBrowser;
+            this.imageBrowser = imageBrowser;
             this.spermogramaViewer = spermogramaViewer;
             btnGreenMarker.Click += btnGreenMarker_Click;
             btnRedMarker.Click += btnRedMarker_Click;
@@ -52,7 +50,7 @@ namespace Polaris.WebForms.Forms
                 spermogramaViewer.View(x);
             });
 
-            spermogramaViewer.CurrentSpermograma.OnChange(spermograma =>
+            spermogramaViewer.CurrentSpermogram.OnChange(spermograma =>
             {
                 spermograma.DisplayImage.OnChange(image =>
                 {
@@ -60,7 +58,7 @@ namespace Polaris.WebForms.Forms
                 });
             });
 
-            spermogramaViewer.CurrentSpermograma.OnChange(spermograma =>
+            spermogramaViewer.CurrentSpermogram.OnChange(spermograma =>
             {
                 spermograma.Spermatosoids.OnChange((x) =>
                 {
@@ -93,7 +91,7 @@ namespace Polaris.WebForms.Forms
         {
             if (string.IsNullOrEmpty(imagesView.SelectedNode.ToolTipText) == false)
             {
-                spermogramaBrowser.Select(imagesView.SelectedNode.ToolTipText.ToString());
+                imageBrowser.Select(imagesView.SelectedNode.ToolTipText.ToString());
                 labelCurrentImage.Text = imagesView.SelectedNode.ToolTipText.ToString();
             }
         }
@@ -106,7 +104,7 @@ namespace Polaris.WebForms.Forms
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     browseDirectoryLabel.Text = folderBrowserDialog.SelectedPath;
-                    spermogramaBrowser.Scan(folderBrowserDialog.SelectedPath).ContinueWith((c) => EnableUI());
+                    imageBrowser.Scan(folderBrowserDialog.SelectedPath).ContinueWith((c) => EnableUI());
                 }
                 else
                 {
@@ -189,9 +187,9 @@ namespace Polaris.WebForms.Forms
                 {
                     var point = TranslateCoordinatesFromPictureBox(me.Location);
                     if (me.Button == MouseButtons.Right)
-                        spermogramaViewer.CurrentSpermograma.State.UnMark(new Models.Point(point.X, point.Y));
+                        spermogramaViewer.CurrentSpermogram.State.UnMark(new Models.Point(point.X, point.Y));
                     if (me.Button == MouseButtons.Left && currentMarker != SpermType.Unknown)
-                        spermogramaViewer.CurrentSpermograma.State.Mark(new Models.Point(point.X, point.Y), currentMarker);
+                        spermogramaViewer.CurrentSpermogram.State.Mark(new Models.Point(point.X, point.Y), currentMarker);
                 }
             }
         }
@@ -247,9 +245,7 @@ namespace Polaris.WebForms.Forms
 
         private void btnDiscover_Click(object sender, EventArgs e)
         {
-            spermogramaViewer.CurrentSpermograma.State.Discover();
+            spermogramaViewer.CurrentSpermogram.State.Discover();
         }
-
-
     }
 }
